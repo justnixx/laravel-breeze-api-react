@@ -7,7 +7,7 @@ This repository is a web application built using Vite, React, TypeScript, Tailwi
 
 To get started with the project, follow these steps:
 
-1. Clone the repository: git clone [repository_url]
+1. Clone the repository: `git clone git@github.com:justnixx/laravel-breeze-api-react.git`
 2. Install the necessary dependencies for both frontend and backend.
 
 # Description
