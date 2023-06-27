@@ -1,6 +1,7 @@
 # Laravel Breeze API + React
-
 This repository is a web application built using Vite, React, TypeScript, Tailwind CSS, and React Router.
+
+<img width="100%" alt="Screenshot" src="https://github.com/justnixx/laravel-breeze-api-react/assets/45858998/4e4d59dd-5bd0-430d-9c2b-ce268e5abc9f">
 
 # Getting Started
 
