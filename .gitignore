@@ -1,0 +1,45 @@
+# Node.js / React / Vite
+node_modules/
+/dist/
+.cache/
+yarn-error.log
+
+# Build output
+/build/
+
+# Vite
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Laravel
+/vendor/
+/public/storage/
+/public/hot/
+/storage/*.key
+/.env
+/.env.backup
+/.env.*
+/.idea
+Homestead.json
+Homestead.yaml
+
+# Testing files
+/phpunit.xml
+/tests/
+
+# Composer
+/composer.phar
+/vendor/
+
+# IDE
+/.idea/
+/.vscode/
+
+# Miscellaneous
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
