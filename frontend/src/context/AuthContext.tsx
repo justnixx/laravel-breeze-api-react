@@ -45,6 +45,7 @@ export interface AuthContextValues {
   register: (data: RegisterParams) => void
   logout: () => void
   loading: boolean
+  sessionVerified: boolean 
   status: string | null
   setStatus: React.Dispatch<React.SetStateAction<string | null>>
   sendPasswordResetLink: (data: { email: string }) => void
@@ -61,11 +62,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [status, setStatus] = useState<string | null>(null)
   const navigate = useNavigate()
 
+  const sessionData = window.localStorage.getItem('sessionVerified');
+  const initialSessionVerified = sessionData ? JSON.parse(sessionData) : false;
+  const [sessionVerified, setSessionVerified] = useState(initialSessionVerified);
+
   const csrf = () => axios.get('/sanctum/csrf-cookie')
 
   const getUser = async () => {
     const { data } = await axios.get('/api/user')
     setUser(data)
+    setSessionVerified(true)
+    window.localStorage.setItem('sessionVerified','true')
   }
 
   const login = async ({ ...data }) => {
@@ -172,8 +179,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const logout = async () => {
     try {
+      setSessionVerified(false)
       await axios.post('/logout')
       setUser(null)
+      window.localStorage.removeItem('sessionVerified')
     } catch (e) {
       console.warn(e)
     }
@@ -185,16 +194,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
         await getUser()
       } catch (e) {
         console.warn(e)
+      } finally {
+        setSessionVerified(false)
       }
     }
 
     if (!user) {
       fetchUser()
     }
-  }, [])
+  }, [user])
 
   return (
-    <AuthContext.Provider value={{ csrf, errors, user, login, register, logout, loading, status, setStatus, sendPasswordResetLink, newPassword, sendEmailVerificationLink }}>
+    <AuthContext.Provider value={{ csrf, errors, user, login, register, logout, loading, status, sessionVerified, setStatus, sendPasswordResetLink, newPassword, sendEmailVerificationLink }}>
       {children}
     </AuthContext.Provider>
   )
