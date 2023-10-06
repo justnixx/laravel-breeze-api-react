@@ -1,9 +1,9 @@
-import { Outlet, Navigate } from "react-router-dom";
-import useAuthContext from "../../hooks/useAuthContext";
-import Spinner from "../ui/Spinner";
+import { Outlet, Navigate } from 'react-router-dom';
+import useAuthContext from '../../hooks/useAuthContext';
+import Spinner from '../ui/Spinner';
 
 export default function GuestLayout() {
-  const { user, sessionVerified } = useAuthContext()
+  const { user, sessionVerified } = useAuthContext();
 
   if (sessionVerified && !user) {
     return (
@@ -13,8 +13,8 @@ export default function GuestLayout() {
         </div>
         <span>Authenticating...</span>
       </div>
-    )
-  } else {
-    return !user ? <Outlet /> : <Navigate to={'/'} />
+    );
   }
+
+  return !user ? <Outlet /> : <Navigate to={'/'} />;
 }

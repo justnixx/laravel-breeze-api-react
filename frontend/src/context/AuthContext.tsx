@@ -57,14 +57,16 @@ export const AuthContext = createContext<AuthContextValues>(
   {} as AuthContextValues
 );
 
+const SESSION_NAME = 'session-verified';
+
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState(null);
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const sessionData = window.localStorage.getItem('sessionVerified');
+  const sessionData = window.localStorage.getItem(SESSION_NAME);
   const initialSessionVerified = sessionData ? JSON.parse(sessionData) : false;
   const [sessionVerified, setSessionVerified] = useState(
     initialSessionVerified
@@ -76,7 +78,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { data } = await axios.get('/api/user');
     setUser(data);
     setSessionVerified(true);
-    window.localStorage.setItem('sessionVerified', 'true');
+    window.localStorage.setItem(SESSION_NAME, 'true');
   };
 
   const login = async ({ ...data }) => {
@@ -195,7 +197,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setSessionVerified(false);
       await axios.post('/logout');
       setUser(null);
-      window.localStorage.removeItem('sessionVerified');
+      window.localStorage.removeItem(SESSION_NAME);
     } catch (e) {
       console.warn(e);
     }
@@ -208,6 +210,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       } catch (e) {
         console.warn(e);
       } finally {
+        setLoading(false);
         setSessionVerified(false);
       }
     };
