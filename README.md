@@ -1,4 +1,5 @@
 # Laravel Breeze API + React
+
 This repository is a web application built using Vite, React, TypeScript, Tailwind CSS, and React Router.
 
 <img width="100%" alt="Screenshot" src="https://github.com/justnixx/laravel-breeze-api-react/assets/45858998/37042cc2-3680-4443-b668-223f5abbe3af">
@@ -28,3 +29,7 @@ Please refer to the respective directories for detailed instructions and additio
 - Tailwind CSS: The frontend styling is done using Tailwind CSS, a utility-first CSS framework.
 - React Router: The frontend uses React Router for declarative routing, enabling navigation and multiple views in the application.
 - Laravel Breeze: The backend API is built using Laravel Breeze, a lightweight authentication scaffold for Laravel applications.
+
+# Demo
+
+👉 [https://breeze.nixx.dev/login](https://breeze.nixx.dev/login)
