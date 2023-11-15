@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
 import axios from '../lib/axios';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -75,10 +76,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const csrf = () => axios.get('/sanctum/csrf-cookie');
 
   const getUser = async () => {
-    const { data } = await axios.get('/api/user');
-    setUser(data);
-    setSessionVerified(true);
-    window.localStorage.setItem(SESSION_NAME, 'true');
+    try {
+      const { data } = await axios.get('/api/user');
+      setUser(data);
+      setSessionVerified(true);
+      window.localStorage.setItem(SESSION_NAME, 'true');
+    } catch (error) {
+      console.error('Error ', error);
+    }
   };
 
   const login = async ({ ...data }) => {
