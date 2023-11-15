@@ -31,7 +31,7 @@ type RegisterParams = {
 };
 
 type NewPasswordParams = {
-  email: string | null;
+  email: string | number;
   token: string | undefined;
   password: string;
   password_confirmation: string;

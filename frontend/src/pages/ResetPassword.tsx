@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { useParams, useSearchParams } from 'react-router-dom';
 
 export default function ResetPassword() {
-  const [email, setEmail] = useState<string | null>('');
+  const [email, setEmail] = useState<string | number>('');
   const [password, setPassword] = useState('');
   const [password_confirmation, setPasswordConfirmation] = useState('');
   const { newPassword, loading, errors, status } = useAuthContext();
@@ -22,7 +22,7 @@ export default function ResetPassword() {
       toast.success(status);
     }
 
-    setEmail(searchParams.get('email'));
+    setEmail(searchParams.get('email') || 0);
   }, [status, searchParams]);
 
   return (
